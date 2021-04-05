@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NasaMarsRover</string>
+    <string name="toolbar_title">Nasa Mars Rover</string>
     <string name="curiosity">curiosity</string>
     <string name="spirit">spirit</string>
     <string name="opportunity">opportunity</string>
@@ -11,4 +12,5 @@
     <string name="launch_date">Launch Date: </string>
     <string name="landing_date">Landing Date: </string>
     <string name="close">CLOSE</string>
+    <string name="options">Options</string>
 </resources>

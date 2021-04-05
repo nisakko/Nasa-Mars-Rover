@@ -20,14 +20,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private val roverPhotoAdapter = RoverPhotoAdapter {marsRoverPhoto -> onItemClick(marsRoverPhoto)}
+    private val roverPhotoAdapter = RoverPhotoAdapter { marsRoverPhoto -> onItemClick(marsRoverPhoto)}
 
     @Inject
     lateinit var handler: CoroutineExceptionHandler
@@ -41,13 +40,23 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initClickListeners(){
-        filterButton.setOnClickListener {
-            homeViewModel.cameraFilterList.value?.let { cameraList ->
-                val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(cameraList.toTypedArray())
-                try {
-                    findNavController().navigate(navDirections)
-                }catch (e: Exception){
-                    e.printStackTrace()
+
+        toolBar.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.filterMenuItem -> {
+                    homeViewModel.cameraFilterList.value?.let { cameraList ->
+                        val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(cameraList.toTypedArray()
+                        )
+                        try {
+                            findNavController().navigate(navDirections)
+                        }catch (e: Exception){
+                            e.printStackTrace()
+                        }
+                    }
+                    true
+                }
+                else -> {
+                    false
                 }
             }
         }
@@ -93,7 +102,7 @@ class HomeFragment : BaseFragment() {
         })
 
         homeViewModel.curiosityInfo.observe(viewLifecycleOwner, {
-            if(tabLayout.selectedTabPosition == 0)
+            if (tabLayout.selectedTabPosition == 0)
                 homeViewModel.currentRover.value = RoverType.Curiosity.roverName
         })
 
@@ -102,17 +111,19 @@ class HomeFragment : BaseFragment() {
         })
 
         homeViewModel.spiritInfo.observe(viewLifecycleOwner, {
-            if(tabLayout.selectedTabPosition == 1)
+            if (tabLayout.selectedTabPosition == 1)
                 homeViewModel.currentRover.value = RoverType.Spirit.roverName
         })
         homeViewModel.opportunityInfo.observe(viewLifecycleOwner, {
-            if(tabLayout.selectedTabPosition == 2)
+            if (tabLayout.selectedTabPosition == 2)
                 homeViewModel.currentRover.value = RoverType.Opportunity.roverName
         })
     }
 
     private fun onItemClick(marsRoverPhoto: MarsRoverPhoto){
-        val navDirections = HomeFragmentDirections.actionHomeFragmentToRoverPhotoDetailsDialogFragment(marsRoverPhoto)
+        val navDirections = HomeFragmentDirections.actionHomeFragmentToRoverPhotoDetailsDialogFragment(
+            marsRoverPhoto
+        )
         try {
             findNavController().navigate(navDirections)
         } catch (e: Exception){
