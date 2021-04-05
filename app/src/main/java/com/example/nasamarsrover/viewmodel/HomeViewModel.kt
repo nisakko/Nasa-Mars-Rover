@@ -1,6 +1,5 @@
 package com.example.nasamarsrover.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.*
 import com.example.nasamarsrover.API_PAGE_SIZE
@@ -9,9 +8,11 @@ import com.example.nasamarsrover.data.datasource.PostDataSource
 import com.example.nasamarsrover.data.enums.RoverType
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepository
 import com.example.nasamarsrover.model.CameraModel
+import com.example.nasamarsrover.model.MarsRoverPhoto
 import com.example.nasamarsrover.model.RoverModel
 import com.example.nasamarsrover.model.RoverModelWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val cameraLiveData = MutableLiveData<String>()
-    val currentRover = MutableLiveData<String>(RoverType.Curiosity.roverName)
+    val currentRover = MutableLiveData<String>()
     val cameraFilterList = MediatorLiveData<List<CameraModel>>().apply {
         addSource(currentRover){ rover ->
             when(rover){
@@ -49,14 +50,12 @@ class HomeViewModel @Inject constructor(
     val curiosityInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Curiosity.roverName)) {
             it == null
-        }){ required ->
-            if(required){
-                Log.d("roverRemoteRequired","curiosity yes")
+        }){ remoteRequired ->
+            if(remoteRequired){
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Curiosity.roverName).saveRoverModelToPreference()
                 }
             } else{
-                Log.d("roverRemoteRequired","curiosity no")
                 postValue(getRoverInfoFromLocalRepository(RoverType.Curiosity.roverName))
             }
         }
@@ -65,14 +64,12 @@ class HomeViewModel @Inject constructor(
     val opportunityInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Opportunity.roverName)) {
             it == null
-        }){ required ->
-            if(required){
-                Log.d("roverRemoteRequired","opportunity yes")
+        }){ remoteRequired ->
+            if(remoteRequired){
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Opportunity.roverName).saveRoverModelToPreference()
                 }
             } else{
-                Log.d("roverRemoteRequired","opportunity no")
                 postValue(getRoverInfoFromLocalRepository(RoverType.Opportunity.roverName))
             }
         }
@@ -81,14 +78,12 @@ class HomeViewModel @Inject constructor(
     val spiritInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Spirit.roverName)) {
             it == null
-        }){ required ->
-            if(required){
-                Log.d("roverRemoteRequired","spirit yes")
+        }){ remoteRequired ->
+            if(remoteRequired){
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Spirit.roverName).saveRoverModelToPreference()
                 }
             } else{
-                Log.d("roverRemoteRequired","spirit no")
                 postValue(getRoverInfoFromLocalRepository(RoverType.Spirit.roverName))
             }
         }
@@ -109,9 +104,10 @@ class HomeViewModel @Inject constructor(
     private suspend fun getRoverInfoFromRemote(roverName: String): Response<RoverModelWrapper> =
         apiHelper.getRoverInfo(roverName)
 
-    val listData =
-        Pager(PagingConfig(pageSize = API_PAGE_SIZE)) {
-            PostDataSource(apiHelper, currentRover.value!!,1000, cameraLiveData.value)
+    fun getPhotosFromRemote(roverName: String): Flow<PagingData<MarsRoverPhoto>> {
+        return Pager(PagingConfig(pageSize = API_PAGE_SIZE)) {
+            PostDataSource(apiHelper, roverName,1000, cameraLiveData.value)
 
         }.flow.cachedIn(viewModelScope)
+    }
 }

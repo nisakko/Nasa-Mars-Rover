@@ -9,6 +9,41 @@
         android:id="@+id/homeFragment"
         android:name="com.example.nasamarsrover.view.fragment.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_bottomSheetFilterDialog"
+            app:destination="@id/bottomSheetFilterDialog">
+            <argument
+                android:name="filterList"
+                app:argType="com.example.nasamarsrover.model.CameraModel[]" />
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_roverPhotoDetailsDialogFragment"
+            app:destination="@id/roverPhotoDetailsDialog">
+            <argument
+                android:name="roverPhoto"
+                app:argType="com.example.nasamarsrover.model.MarsRoverPhoto" />
+        </action>
+    </fragment>
+
+    <dialog
+        android:id="@+id/bottomSheetFilterDialog"
+        android:name="com.example.nasamarsrover.view.fragment.BottomSheetFilterDialog"
+        android:label="BottomSheetFilterDialog"
+        tools:layout="@layout/fragment_bottom_sheet_dialog">
+        <argument
+            android:name="filterList"
+            app:argType="com.example.nasamarsrover.model.CameraModel[]" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/roverPhotoDetailsDialog"
+        android:name="com.example.nasamarsrover.view.fragment.RoverPhotoDetailsDialogFragment"
+        android:label="RoverPhotoDetailsDialogFragment"
+        tools:layout="@layout/fragment_rover_photo_dialog">
+        <argument
+            android:name="roverPhoto"
+            app:argType="com.example.nasamarsrover.model.MarsRoverPhoto" />
+    </dialog>
 
 </navigation>

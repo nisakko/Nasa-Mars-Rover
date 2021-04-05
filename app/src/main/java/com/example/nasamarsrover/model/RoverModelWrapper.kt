@@ -1,3 +1,6 @@
 package com.example.nasamarsrover.model
 
-data class RoverModelWrapper(val rover: RoverModel)
+import com.google.gson.annotations.SerializedName
+
+data class RoverModelWrapper(@SerializedName(value = "rover")
+                             val rover: RoverModel)

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="marsRoverPhoto"
+            type="com.example.nasamarsrover.model.MarsRoverPhoto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="@dimen/card_view_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.833">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_default">
+
+                <Button
+                    android:id="@+id/closeButton"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="0dp"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="@string/close"
+                    android:textSize="@dimen/text_size_large"/>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="@id/closeButton"
+                    app:layout_constraintEnd_toEndOf="@id/closeButton"
+                    app:layout_constraintTop_toBottomOf="@id/closeButton"/>
+
+                <ImageView
+                    android:id="@+id/roverPhoto"
+                    android:layout_width="@dimen/photo_width_size"
+                    android:layout_height="@dimen/photo_height_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/margin_medium_small"
+                    app:roverImage="@{marsRoverPhoto.imgSrc}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/closeButton"
+                    tools:ignore = "contentDescription" />
+
+                <LinearLayout
+                    android:id="@+id/earthDateLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/roverPhoto">
+
+                    <TextView
+                        android:id="@+id/earthDateTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/earth_date" />
+
+                    <TextView
+                        android:id="@+id/earthDateValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.earthDate}" />
+                </LinearLayout>
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/earthDateLayout"/>
+
+                <LinearLayout
+                    android:id="@+id/roverNameLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/earthDateLayout">
+
+                    <TextView
+                        android:id="@+id/roverNameTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/rover_name" />
+
+                    <TextView
+                        android:id="@+id/roverNameValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.rover.name}" />
+                </LinearLayout>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/roverNameLayout"/>
+
+                <LinearLayout
+                    android:id="@+id/cameraLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/roverNameLayout">
+
+                    <TextView
+                        android:id="@+id/cameraTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/camera" />
+
+                    <TextView
+                        android:id="@+id/cameraValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.camera.name}" />
+                </LinearLayout>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cameraLayout"/>
+
+                <LinearLayout
+                    android:id="@+id/statusLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cameraLayout">
+
+                    <TextView
+                        android:id="@+id/statusTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/status" />
+
+                    <TextView
+                        android:id="@+id/statusValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.rover.status}" />
+                </LinearLayout>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/statusLayout"/>
+
+                <LinearLayout
+                    android:id="@+id/launchDateLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/statusLayout">
+
+                    <TextView
+                        android:id="@+id/launchDateTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/launch_date" />
+
+                    <TextView
+                        android:id="@+id/launchDateValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.rover.launchDate}" />
+                </LinearLayout>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/launchDateLayout"/>
+
+                <LinearLayout
+                    android:id="@+id/landingDateLayout"
+                    style="@style/roverContainerStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/launchDateLayout">
+
+                    <TextView
+                        android:id="@+id/landingDateTitle"
+                        style="@style/roverContainerTitleStyle"
+                        android:text="@string/landing_date" />
+
+                    <TextView
+                        android:id="@+id/landingDateValue"
+                        style="@style/roverContainerValueStyle"
+                        android:text="@{marsRoverPhoto.rover.landingDate}" />
+                </LinearLayout>
+
+                <View
+                    style="@style/horizontalLineStyle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/landingDateLayout"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

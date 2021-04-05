@@ -1,8 +1,10 @@
 package com.example.nasamarsrover.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Rover(@SerializedName(value = "id")
                  val id: Int,
                  @SerializedName(value = "name")
@@ -12,5 +14,4 @@ data class Rover(@SerializedName(value = "id")
                  @SerializedName(value = "launch_date")
                  val launchDate: String,
                  @SerializedName(value = "status")
-                 @field:Json(name = "status")
-                 val status: String)
+                 val status: String): Parcelable

@@ -8,8 +8,6 @@ import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelper
 import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelperImpl
 import com.example.nasamarsrover.data.remote.NasaMarsRoverService
 import com.google.gson.Gson
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,11 +37,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideMoshiFactory(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)

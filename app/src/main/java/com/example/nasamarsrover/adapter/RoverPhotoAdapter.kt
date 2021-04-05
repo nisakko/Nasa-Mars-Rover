@@ -1,25 +1,23 @@
 package com.example.nasamarsrover.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.nasamarsrover.R
+import com.example.nasamarsrover.databinding.RoverPhotoItemBinding
 import com.example.nasamarsrover.model.MarsRoverPhoto
-import kotlinx.android.synthetic.main.rover_photo_item.view.*
 
-class RoverPhotoAdapter : PagingDataAdapter<MarsRoverPhoto, RoverPhotoAdapter.ViewHolder>(
-    RoverPhotoDifferentiator
-) {
+class RoverPhotoAdapter(private val onClick: (MarsRoverPhoto) -> (Unit)) : PagingDataAdapter<MarsRoverPhoto, RoverPhotoAdapter.ViewHolder>
+    (RoverPhotoDifferentiator) {
 
-    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
+    class ViewHolder(private val binding: RoverPhotoItemBinding, val onClick: (MarsRoverPhoto) -> (Unit)) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MarsRoverPhoto?){
             item?.let { photo ->
-                view.roverCamera.text = photo.camera.name
-                Glide.with(view).load(photo.imgSrc).into(view.roverPhoto)
+                binding.marsRoverPhoto = photo
+                binding.root.setOnClickListener {
+                    onClick(item)
+                }
             }
         }
     }
@@ -30,9 +28,7 @@ class RoverPhotoAdapter : PagingDataAdapter<MarsRoverPhoto, RoverPhotoAdapter.Vi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.rover_photo_item, parent, false)
+            RoverPhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), onClick
         )
     }
 
