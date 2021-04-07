@@ -4,6 +4,7 @@ import android.os.Parcelable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.example.nasamarsrover.R
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -27,7 +28,7 @@ data class MarsRoverPhoto(@SerializedName(value = "id")
         @JvmStatic
         @BindingAdapter("roverImage")
         fun loadImage(view: ImageView, imgSrc: String) {
-            Glide.with(view.context).load(imgSrc).into(view)
+            Glide.with(view.context).load(imgSrc).placeholder(R.drawable.ic_wrapping_loading_placeholder).error(R.drawable.ic_wrapping_error_placeholder).into(view)
         }
     }
 }

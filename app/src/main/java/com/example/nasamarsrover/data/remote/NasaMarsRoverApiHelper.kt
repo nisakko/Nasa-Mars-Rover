@@ -8,12 +8,17 @@ interface NasaMarsRoverApiHelper {
 
     suspend fun getPhotos(
         roverName: String,
-        sol: Int,
+        sol: Int?,
+        earthDate: String?,
         camera: String?,
         pageNumber: Int
     ): Response<MarsRoverResponse>
 
     suspend fun getRoverInfo(
+        roverName: String
+    ): Response<RoverModelWrapper>
+
+    suspend fun getRoverInfo2(
         roverName: String
     ): Response<RoverModelWrapper>
 }

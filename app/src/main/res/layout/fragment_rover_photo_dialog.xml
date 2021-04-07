@@ -36,18 +36,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_black"
                     android:padding="0dp"
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/button_close_background"
                     android:textColor="@android:color/darker_gray"
                     android:text="@string/close"
                     android:textSize="@dimen/text_size_large"/>
-
-                <View
-                    style="@style/horizontalLineStyle"
-                    android:layout_width="0dp"
-                    app:layout_constraintStart_toStartOf="@id/closeButton"
-                    app:layout_constraintEnd_toEndOf="@id/closeButton"
-                    app:layout_constraintTop_toBottomOf="@id/closeButton"/>
 
                 <ImageView
                     android:id="@+id/roverPhoto"
@@ -75,7 +69,9 @@
                         android:id="@+id/earthDateValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.earthDate}" />
+
                 </LinearLayout>
+
                 <View
                     style="@style/horizontalLineStyle"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +93,7 @@
                         android:id="@+id/roverNameValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.rover.name}" />
+
                 </LinearLayout>
 
                 <View
@@ -120,6 +117,7 @@
                         android:id="@+id/cameraValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.camera.name}" />
+
                 </LinearLayout>
 
                 <View
@@ -143,6 +141,7 @@
                         android:id="@+id/statusValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.rover.status}" />
+
                 </LinearLayout>
 
                 <View
@@ -166,6 +165,7 @@
                         android:id="@+id/launchDateValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.rover.launchDate}" />
+
                 </LinearLayout>
 
                 <View
@@ -189,6 +189,7 @@
                         android:id="@+id/landingDateValue"
                         style="@style/roverContainerValueStyle"
                         android:text="@{marsRoverPhoto.rover.landingDate}" />
+
                 </LinearLayout>
 
                 <View
@@ -198,6 +199,7 @@
                     app:layout_constraintTop_toBottomOf="@id/landingDateLayout"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

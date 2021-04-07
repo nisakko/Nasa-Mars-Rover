@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/refreshMenuItem"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/refresh"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/optionsMenuItem"
         android:icon="@drawable/ic_options"
-        app:showAsAction="ifRoom"
-        android:title="@string/options" />
+        android:title="@string/options"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/solMenuItem"
+                android:title="@string/filter_by_sol"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/earthDateMenuItem"
+                android:title="@string/filter_by_date"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
     <item
         android:id="@+id/filterMenuItem"
         android:icon="@drawable/ic_filter"
-        app:showAsAction="ifRoom"
-        android:title="@string/filter" />
+        android:title="@string/filter"
+        app:showAsAction="ifRoom" />
 </menu>

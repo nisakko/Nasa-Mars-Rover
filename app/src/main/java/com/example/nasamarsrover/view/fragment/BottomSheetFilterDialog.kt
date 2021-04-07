@@ -31,6 +31,10 @@ class BottomSheetFilterDialog : BottomSheetDialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRV()
+        noFilterLayout.setOnClickListener {
+            homeViewModel.cameraLiveData.value = null
+            dismiss()
+        }
     }
 
     private fun setupRV(){

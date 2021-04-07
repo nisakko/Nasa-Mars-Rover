@@ -2,16 +2,19 @@ package com.example.nasamarsrover.view.fragment
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.nasamarsrover.R
+import com.example.nasamarsrover.adapter.FooterLoadStateAdapter
 import com.example.nasamarsrover.adapter.RoverPhotoAdapter
 import com.example.nasamarsrover.data.enums.RoverType
+import com.example.nasamarsrover.model.DialogModel
 import com.example.nasamarsrover.model.MarsRoverPhoto
+import com.example.nasamarsrover.utils.tryToNavigate
 import com.example.nasamarsrover.view.fragment.base.BaseFragment
 import com.example.nasamarsrover.viewmodel.HomeViewModel
 import com.google.android.material.tabs.TabLayout
@@ -45,14 +48,31 @@ class HomeFragment : BaseFragment() {
             when(menuItem.itemId){
                 R.id.filterMenuItem -> {
                     homeViewModel.cameraFilterList.value?.let { cameraList ->
-                        val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(cameraList.toTypedArray()
+                        val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(cameraList.toTypedArray())
+                        tryToNavigate(navDirections)
+                    } ?: kotlin.run {
+                        val navDirections = HomeFragmentDirections.actionHomeFragmentToInformationDialogFragment(
+                            DialogModel(R.string.rover_info_dialog_failed_title,
+                                R.string.rover_info_dialog_failed_message,R.string.retry, R.string.cancel)
                         )
-                        try {
-                            findNavController().navigate(navDirections)
-                        }catch (e: Exception){
-                            e.printStackTrace()
-                        }
+                        tryToNavigate(navDirections)
                     }
+                    true
+                }
+                R.id.refreshMenuItem -> {
+                    roverPhotoAdapter.refresh()
+                    true
+                }
+                R.id.solMenuItem -> {
+                    val navDirections = HomeFragmentDirections.actionHomeFragmentToSolPickerDialogFragment(
+                        DialogModel(title = R.string.sol_description, btnActiveText = R.string.apply, btnPassiveText = R.string.cancel))
+                    tryToNavigate(navDirections)
+                    true
+                }
+                R.id.earthDateMenuItem -> {
+                    val navDirections = HomeFragmentDirections.actionHomeFragmentToDatePickerDialogFragment(
+                        DialogModel(title = R.string.sol_description, btnActiveText = R.string.apply, btnPassiveText = R.string.cancel))
+                    tryToNavigate(navDirections)
                     true
                 }
                 else -> {
@@ -77,19 +97,43 @@ class HomeFragment : BaseFragment() {
         recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             setHasFixedSize(true)
-            adapter = roverPhotoAdapter
+            adapter = roverPhotoAdapter.withLoadStateFooter(
+                footer = FooterLoadStateAdapter { roverPhotoAdapter.retry() }
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             roverPhotoAdapter.loadStateFlow.collectLatest { loadStates ->
-                progressBar.isVisible = loadStates.refresh is LoadState.Loading
+                val refreshState = loadStates.refresh
+                progressBar.isVisible = refreshState is LoadState.Loading
+                if(refreshState is LoadState.NotLoading && roverPhotoAdapter.itemCount == 0){
+                    Toast.makeText(requireContext(), getString(R.string.no_results), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
     private fun initObservers() {
 
+        homeViewModel.earthDateLiveData.observe(viewLifecycleOwner, {
+            if(it != null){
+                homeViewModel.solLiveData.value = null
+                roverPhotoAdapter.refresh()
+            }
+        })
+
+        homeViewModel.solLiveData.observe(viewLifecycleOwner, {
+            if(it != null){
+                homeViewModel.earthDateLiveData.value = null
+                roverPhotoAdapter.refresh()
+            }
+        })
+
         homeViewModel.cameraLiveData.observe(viewLifecycleOwner, {
+            roverPhotoAdapter.refresh()
+        })
+
+        homeViewModel.solLiveData.observe(viewLifecycleOwner, {
             roverPhotoAdapter.refresh()
         })
 
@@ -121,13 +165,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun onItemClick(marsRoverPhoto: MarsRoverPhoto){
-        val navDirections = HomeFragmentDirections.actionHomeFragmentToRoverPhotoDetailsDialogFragment(
-            marsRoverPhoto
-        )
-        try {
-            findNavController().navigate(navDirections)
-        } catch (e: Exception){
-            e.printStackTrace()
-        }
+        val navDirections = HomeFragmentDirections.actionHomeFragmentToRoverPhotoDetailsDialogFragment(marsRoverPhoto)
+        tryToNavigate(navDirections)
     }
 }

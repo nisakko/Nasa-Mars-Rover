@@ -1,6 +1,7 @@
 package com.example.nasamarsrover.view.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.nasamarsrover.R
 import com.example.nasamarsrover.databinding.FragmentRoverPhotoDialogBinding
@@ -17,7 +18,7 @@ class RoverPhotoDetailsDialogFragment: BaseBindingDialogFragment<FragmentRoverPh
         binding.marsRoverPhoto = args.roverPhoto
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun initView(view: View, savedInstanceState: Bundle?) {
         closeButton.setOnClickListener {
             dismiss()
         }

@@ -12,7 +12,8 @@ interface NasaMarsRoverService {
     @GET("rovers/{roverName}/photos")
     suspend fun getPhotos(
         @Path(value = "roverName") roverName: String,
-        @Query("sol") sol: Int,
+        @Query("sol") sol: Int?,
+        @Query("earth_date") earthDate: String?,
         @Query("camera") camera: String?,
         @Query("api_key") type: String,
         @Query("page") pageNumber: Int

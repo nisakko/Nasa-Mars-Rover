@@ -20,7 +20,7 @@ abstract class BaseBindingDialogFragment<T : ViewDataBinding> : DialogFragment()
     @LayoutRes
     protected abstract fun getLayoutId(): Int
 
-    protected abstract fun initView(savedInstanceState: Bundle?)
+    protected abstract fun initView(view: View, savedInstanceState: Bundle?)
 
     private var binding: T? = null
     private var isFirstViewCreation = false
@@ -54,7 +54,7 @@ abstract class BaseBindingDialogFragment<T : ViewDataBinding> : DialogFragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (isFirstViewCreation) {
             view.requestApplyInsets()
-            initView(savedInstanceState)
+            initView(view, savedInstanceState)
         }
     }
 

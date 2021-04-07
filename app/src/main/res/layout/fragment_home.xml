@@ -17,6 +17,7 @@
             app:title="@string/toolbar_title"
             app:titleTextColor="@color/white"
             app:menu="@menu/main_menu"
+            android:background="@color/purple_700"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
         <com.google.android.material.tabs.TabLayout
@@ -64,6 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/purple_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

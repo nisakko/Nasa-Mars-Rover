@@ -11,13 +11,17 @@ class NasaMarsRoverApiHelperImpl @Inject constructor(val nasaMarsRoverService: N
 
     override suspend fun getPhotos(
         roverName: String,
-        sol: Int,
+        sol: Int?,
+        earthDate: String?,
         camera: String?,
         pageNumber: Int
     ): Response<MarsRoverResponse> =
-        nasaMarsRoverService.getPhotos(roverName, sol, camera, API_KEY, pageNumber)
+        nasaMarsRoverService.getPhotos(roverName, sol, earthDate, camera, API_KEY, pageNumber)
 
     override suspend fun getRoverInfo(roverName: String): Response<RoverModelWrapper> =
+        nasaMarsRoverService.getRoverInfo(roverName, API_KEY)
+
+    override suspend fun getRoverInfo2(roverName: String): Response<RoverModelWrapper> =
         nasaMarsRoverService.getRoverInfo(roverName, API_KEY)
 
 }

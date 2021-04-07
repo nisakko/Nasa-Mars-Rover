@@ -19,4 +19,6 @@
     <dimen name="photo_height_size">150dp</dimen>
     <dimen name="card_view_corner_radius">6dp</dimen>
     <dimen name="horizontal_line_height">1dp</dimen>
+    <dimen name="no_filter_text_margin_start">34dp</dimen>
+    <dimen name="dialog_button_layout_margin_top">44dp</dimen>
 </resources>

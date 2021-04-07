@@ -24,7 +24,59 @@
                 android:name="roverPhoto"
                 app:argType="com.example.nasamarsrover.model.MarsRoverPhoto" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_solPickerDialogFragment"
+            app:destination="@id/solPickerDialogFragment" >
+            <argument
+                android:name="dialogModel"
+                app:argType="com.example.nasamarsrover.model.DialogModel"/>
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_datePickerDialogFragment"
+            app:destination="@id/datePickerDialogFragment" >
+            <argument
+                android:name="dialogModel"
+                app:argType="com.example.nasamarsrover.model.DialogModel"/>
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_informationDialogFragment"
+            app:destination="@id/informationDialogFragment" >
+            <argument
+                android:name="dialogModel"
+                app:argType="com.example.nasamarsrover.model.DialogModel"/>
+        </action>
     </fragment>
+
+
+    <dialog
+        android:id="@+id/solPickerDialogFragment"
+        android:name="com.example.nasamarsrover.view.fragment.SolPickerDialogFragment"
+        android:label="SolPickerDialogFragment"
+        tools:layout="@layout/fragment_sol_picker_dialog">
+        <argument
+            android:name="dialogModel"
+            app:argType="com.example.nasamarsrover.model.DialogModel"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/informationDialogFragment"
+        android:name="com.example.nasamarsrover.view.fragment.InformationDialogFragment"
+        android:label="InformationDialogFragment"
+        tools:layout="@layout/fragment_information_dialog">
+        <argument
+            android:name="dialogModel"
+            app:argType="com.example.nasamarsrover.model.DialogModel"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/datePickerDialogFragment"
+        android:name="com.example.nasamarsrover.view.fragment.DatePickerDialogFragment"
+        android:label="DatePickerDialogFragment"
+        tools:layout="@layout/fragment_date_picker_dialog">
+        <argument
+            android:name="dialogModel"
+            app:argType="com.example.nasamarsrover.model.DialogModel"/>
+    </dialog>
 
     <dialog
         android:id="@+id/bottomSheetFilterDialog"
