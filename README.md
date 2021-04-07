@@ -19,27 +19,25 @@ Project is created with:
 
 Select the Mars Rover on top bar to view photos taken by that rover
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/select-rovers.jpeg)
 <img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/select-rovers.jpeg" width="250" height="500">
-
 
 Use the settings button to filter photos according to the date they are taken
 
 Note: Sol is a day concept for Mars
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/filter.jpeg =250x500)
+<img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/filter.jpeg" width="250" height="500">
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/sol.jpeg =250x500)
+<img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/sol.jpeg" width="250" height="500">
 
 User the filter button to filter photos according to the camera positions on the rover
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/filter-camera.jpeg =250x500)
+<img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/filter-camera.jpeg" width="250" height="500">
 
 Click on a photo to see detailed info of it
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/photo-info.jpeg =250x500)
+<img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/photo-info.jpeg" width="250" height="500">
 
-	
 If no internet connection, application gives a warning and option to retry
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/network-error.jpeg =250x500)
+<img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/network-error.jpeg" width="250" height="500">
+
