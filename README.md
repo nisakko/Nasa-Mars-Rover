@@ -29,7 +29,7 @@ Note: Sol is a day concept for Mars
 
 <img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/sol.jpeg" width="250" height="500">
 
-User the filter button to filter photos according to the camera positions on the rover
+Use the filter button to filter photos according to the camera positions on the rover
 
 <img src="https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/filter-camera.jpeg" width="250" height="500">
 
