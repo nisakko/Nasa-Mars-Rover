@@ -4,13 +4,10 @@ import androidx.lifecycle.*
 import androidx.paging.*
 import com.example.nasamarsrover.API_PAGE_SIZE
 import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelper
-import com.example.nasamarsrover.data.datasource.PostDataSource
+import com.example.nasamarsrover.data.datasource.PagingDataSource
 import com.example.nasamarsrover.data.enums.RoverType
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepository
-import com.example.nasamarsrover.model.CameraModel
-import com.example.nasamarsrover.model.MarsRoverPhoto
-import com.example.nasamarsrover.model.RoverModel
-import com.example.nasamarsrover.model.RoverModelWrapper
+import com.example.nasamarsrover.model.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -23,14 +20,14 @@ class HomeViewModel @Inject constructor(
     private val marsRoverPreferenceRepository: MarsRoverPreferenceRepository
 ) : ViewModel() {
 
-    val cameraLiveData = MutableLiveData<String>()
+    val currentCameraFilterLiveData = MutableLiveData<CameraModel>()
     val currentRover = MutableLiveData(RoverType.Curiosity.roverName)
-    val solLiveData = MutableLiveData(1000)
+    val solLiveData = MutableLiveData(DEFAULT_SOL)
     val earthDateLiveData = MutableLiveData<String>(null)
 
-    val cameraFilterList = MediatorLiveData<List<CameraModel>>().apply {
-        addSource(currentRover){ rover ->
-            when(rover){
+    val cameraList = MediatorLiveData<List<CameraModel>>().apply {
+        addSource(currentRover) { rover ->
+            when (rover) {
                 RoverType.Spirit.roverName -> {
                     spiritInfo.value?.let {
                         value = it.cameras
@@ -53,12 +50,12 @@ class HomeViewModel @Inject constructor(
     val curiosityInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Curiosity.roverName)) {
             it == null
-        }){ remoteRequired ->
-            if(remoteRequired){
+        }) { remoteRequired ->
+            if (remoteRequired) {
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Curiosity.roverName)
                 }
-            } else{
+            } else {
                 postValue(getRoverInfoFromLocalRepository(RoverType.Curiosity.roverName))
             }
         }
@@ -67,12 +64,12 @@ class HomeViewModel @Inject constructor(
     val opportunityInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Opportunity.roverName)) {
             it == null
-        }){ remoteRequired ->
-            if(remoteRequired){
+        }) { remoteRequired ->
+            if (remoteRequired) {
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Opportunity.roverName)
                 }
-            } else{
+            } else {
                 postValue(getRoverInfoFromLocalRepository(RoverType.Opportunity.roverName))
             }
         }
@@ -81,18 +78,19 @@ class HomeViewModel @Inject constructor(
     val spiritInfo = MediatorLiveData<RoverModel>().apply {
         addSource(Transformations.map(marsRoverPreferenceRepository.getRoverInfoLiveData(RoverType.Spirit.roverName)) {
             it == null
-        }){ remoteRequired ->
-            if(remoteRequired){
+        }) { remoteRequired ->
+            if (remoteRequired) {
                 viewModelScope.launch {
                     getRoverInfoFromRemote(RoverType.Spirit.roverName)
                 }
-            } else{
+            } else {
                 postValue(getRoverInfoFromLocalRepository(RoverType.Spirit.roverName))
             }
         }
     }
 
-    private fun getRoverInfoFromLocalRepository(roverName: String): RoverModel? = marsRoverPreferenceRepository.getRoverInfo(roverName)
+    private fun getRoverInfoFromLocalRepository(roverName: String): RoverModel? =
+        marsRoverPreferenceRepository.getRoverInfo(roverName)
 
     private fun Response<RoverModelWrapper>.saveRoverModelToPreference() {
         if (this.isSuccessful) {
@@ -103,11 +101,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    suspend fun getRoverInfoFromRemote(roverName: String): Boolean{
+    suspend fun getRoverInfoFromRemote(roverName: String): Boolean {
         return try {
             apiHelper.getRoverInfo(roverName).saveRoverModelToPreference()
             true
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             false
         }
@@ -116,7 +114,30 @@ class HomeViewModel @Inject constructor(
     fun getPhotosFromRemote(roverName: String): Flow<PagingData<MarsRoverPhoto>> {
 
         return Pager(PagingConfig(pageSize = API_PAGE_SIZE)) {
-            PostDataSource(apiHelper, roverName, solLiveData.value, earthDateLiveData.value, cameraLiveData.value)
+            PagingDataSource(
+                apiHelper,
+                roverName,
+                solLiveData.value,
+                earthDateLiveData.value,
+                currentCameraFilterLiveData.value
+            )
         }.flow.cachedIn(viewModelScope)
+    }
+
+    fun getCameraFilterList(cameras: List<CameraModel>): MutableList<FilterCameraModel>{
+        val filterCameraModels = mutableListOf<FilterCameraModel>()
+        cameras.map { camera ->
+            filterCameraModels.add(
+                FilterCameraModel(
+                    isSelected = camera == currentCameraFilterLiveData.value,
+                    cameraModel = camera
+                )
+            )
+        }
+        return filterCameraModels
+    }
+
+    companion object {
+        const val DEFAULT_SOL = 1000
     }
 }

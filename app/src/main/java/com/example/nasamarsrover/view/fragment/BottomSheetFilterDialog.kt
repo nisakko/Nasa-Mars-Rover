@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasamarsrover.R
 import com.example.nasamarsrover.adapter.FilterAdapter
-import com.example.nasamarsrover.model.CameraModel
+import com.example.nasamarsrover.databinding.FragmentBottomSheetDialogBinding
+import com.example.nasamarsrover.model.FilterCameraModel
 import com.example.nasamarsrover.viewmodel.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_dialog.*
@@ -24,15 +26,20 @@ class BottomSheetFilterDialog : BottomSheetDialogFragment(){
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_bottom_sheet_dialog, container, false)
+    ): View {
+        val binding: FragmentBottomSheetDialogBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet_dialog, container, false)
+        return binding.apply {
+            lifecycleOwner = this@BottomSheetFilterDialog
+            viewModel = homeViewModel
+            executePendingBindings()
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRV()
         noFilterLayout.setOnClickListener {
-            homeViewModel.cameraLiveData.value = null
+            homeViewModel.currentCameraFilterLiveData.value = null
             dismiss()
         }
     }
@@ -52,8 +59,8 @@ class BottomSheetFilterDialog : BottomSheetDialogFragment(){
         filterAdapter.submitList(args.filterList.toList())
     }
 
-    private fun onItemClick(camera: CameraModel){
-        homeViewModel.cameraLiveData.value = camera.name
+    private fun onItemClick(filterCamera: FilterCameraModel){
+        homeViewModel.currentCameraFilterLiveData.value = filterCamera.cameraModel
         dismiss()
     }
 }

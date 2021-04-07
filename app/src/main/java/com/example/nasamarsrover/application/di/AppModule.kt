@@ -1,7 +1,6 @@
 package com.example.nasamarsrover.application.di
 
 import android.util.Log
-import com.bumptech.glide.request.RequestOptions
 import com.example.nasamarsrover.*
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepository
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepositoryImpl
@@ -70,16 +69,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideMarsRoverPreferenceRepository (preferenceRepository: MarsRoverPreferenceRepositoryImpl): MarsRoverPreferenceRepository {
+    fun provideMarsRoverPreferenceRepository(preferenceRepository: MarsRoverPreferenceRepositoryImpl): MarsRoverPreferenceRepository {
         return preferenceRepository
     }
-
-    @Provides
-    @Singleton
-    fun provideGlideRequestOptions(): RequestOptions  =
-        RequestOptions()
-            .centerCrop()
-            .placeholder(R.drawable.ic_wrapping_loading_placeholder)
-            .error(R.drawable.ic_wrapping_error_placeholder)
-
 }

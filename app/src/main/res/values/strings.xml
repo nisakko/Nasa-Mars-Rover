@@ -18,7 +18,7 @@
     <string name="enter_an_integer_sol_value">Enter an integer sol value</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
-    <string name="sol_description">Photos are organized by the sol (Martian rotation or day) on which they were taken, counting up from the rover\'s landing date.</string>
+    <string name="sol_description">Photos can be organized by the sol (Martian rotation or day) on which they were taken, counting up from the rover\'s landing date.</string>
     <string name="no_filter">No Filter</string>
     <string name="earth_date_description">Search photos by the Earth date</string>
     <string name="no_results">No results were found.</string>

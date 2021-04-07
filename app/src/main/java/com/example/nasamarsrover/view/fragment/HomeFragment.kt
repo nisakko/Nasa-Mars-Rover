@@ -47,8 +47,9 @@ class HomeFragment : BaseFragment() {
         toolBar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
                 R.id.filterMenuItem -> {
-                    homeViewModel.cameraFilterList.value?.let { cameraList ->
-                        val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(cameraList.toTypedArray())
+                    homeViewModel.cameraList.value?.let { cameraList ->
+                        val navDirections = HomeFragmentDirections.actionHomeFragmentToBottomSheetFilterDialog(
+                            homeViewModel.getCameraFilterList(cameraList).toTypedArray())
                         tryToNavigate(navDirections)
                     } ?: kotlin.run {
                         val navDirections = HomeFragmentDirections.actionHomeFragmentToInformationDialogFragment(
@@ -84,7 +85,7 @@ class HomeFragment : BaseFragment() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 homeViewModel.currentRover.value = tab?.text.toString()
-                homeViewModel.cameraLiveData.value = null
+                homeViewModel.currentCameraFilterLiveData.value = null
                 roverPhotoAdapter.refresh()
             }
 
@@ -129,11 +130,7 @@ class HomeFragment : BaseFragment() {
             }
         })
 
-        homeViewModel.cameraLiveData.observe(viewLifecycleOwner, {
-            roverPhotoAdapter.refresh()
-        })
-
-        homeViewModel.solLiveData.observe(viewLifecycleOwner, {
+        homeViewModel.currentCameraFilterLiveData.observe(viewLifecycleOwner, {
             roverPhotoAdapter.refresh()
         })
 
@@ -150,7 +147,7 @@ class HomeFragment : BaseFragment() {
                 homeViewModel.currentRover.value = RoverType.Curiosity.roverName
         })
 
-        homeViewModel.cameraFilterList.observe(viewLifecycleOwner, {
+        homeViewModel.cameraList.observe(viewLifecycleOwner, {
             Log.d("cameraListTag", it.toString())
         })
 

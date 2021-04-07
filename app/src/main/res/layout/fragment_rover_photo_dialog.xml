@@ -28,19 +28,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/margin_default">
+                android:padding="@dimen/margin_medium">
 
                 <Button
                     android:id="@+id/closeButton"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/close_button_dimens"
+                    android:layout_height="@dimen/close_button_dimens"
                     android:fontFamily="@font/muli_black"
-                    android:padding="0dp"
-                    android:background="@drawable/button_close_background"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="@string/close"
+                    android:background="@drawable/ic_close"
                     android:textSize="@dimen/text_size_large"/>
 
                 <ImageView

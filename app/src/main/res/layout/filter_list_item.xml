@@ -2,8 +2,8 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="camera"
-            type="com.example.nasamarsrover.model.CameraModel" />
+            name="filterCamera"
+            type="com.example.nasamarsrover.model.FilterCameraModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,9 +20,10 @@
         android:layout_marginStart="@dimen/margin_big"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@{filterCamera.selected ? @color/green : @color/black}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rightArrow"
-        android:text="@{camera.name}"
+        android:text="@{filterCamera.cameraModel.name}"
         android:padding="@dimen/margin_medium_small"
         android:textSize="@dimen/text_size_large"/>
 

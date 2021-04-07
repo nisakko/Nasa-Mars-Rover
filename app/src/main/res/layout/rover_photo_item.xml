@@ -27,13 +27,5 @@
             app:roverImage="@{marsRoverPhoto.imgSrc}"
             tools:ignore="contentDescription" />
 
-        <TextView
-            android:id="@+id/roverCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/roverPhoto"
-            android:text="@{marsRoverPhoto.camera.name}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

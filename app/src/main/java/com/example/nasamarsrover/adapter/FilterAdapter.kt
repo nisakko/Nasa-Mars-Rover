@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nasamarsrover.databinding.FilterListItemBinding
-import com.example.nasamarsrover.model.CameraModel
+import com.example.nasamarsrover.model.FilterCameraModel
 
-class FilterAdapter(private val onClick: (CameraModel) -> Unit) :
-    ListAdapter<CameraModel,FilterAdapter.ViewHolder>(FilterItemDiffCallback) {
+class FilterAdapter(private val onClick: (FilterCameraModel) -> Unit) :
+    ListAdapter<FilterCameraModel,FilterAdapter.ViewHolder>(FilterItemDiffCallback) {
 
-    class ViewHolder(private val binding: FilterListItemBinding, val onClick: (CameraModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CameraModel){
-            binding.camera = item
+    class ViewHolder(private val binding: FilterListItemBinding, val onClick: (FilterCameraModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: FilterCameraModel){
+            binding.filterCamera = item
             binding.root.setOnClickListener {
                 onClick(item)
             }
@@ -31,12 +31,12 @@ class FilterAdapter(private val onClick: (CameraModel) -> Unit) :
     }
 
 
-    object FilterItemDiffCallback : DiffUtil.ItemCallback<CameraModel>() {
-        override fun areItemsTheSame(oldItem: CameraModel, newItem: CameraModel): Boolean {
-            return oldItem.name == newItem.name
+    object FilterItemDiffCallback : DiffUtil.ItemCallback<FilterCameraModel>() {
+        override fun areItemsTheSame(oldItem: FilterCameraModel, newItem: FilterCameraModel): Boolean {
+            return oldItem.cameraModel.name == newItem.cameraModel.name
         }
 
-        override fun areContentsTheSame(oldItem: CameraModel, newItem: CameraModel): Boolean {
+        override fun areContentsTheSame(oldItem: FilterCameraModel, newItem: FilterCameraModel): Boolean {
             return oldItem == newItem
         }
     }

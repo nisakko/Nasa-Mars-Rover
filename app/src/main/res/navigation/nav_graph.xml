@@ -15,7 +15,7 @@
             app:destination="@id/bottomSheetFilterDialog">
             <argument
                 android:name="filterList"
-                app:argType="com.example.nasamarsrover.model.CameraModel[]" />
+                app:argType="com.example.nasamarsrover.model.FilterCameraModel[]" />
         </action>
         <action
             android:id="@+id/action_homeFragment_to_roverPhotoDetailsDialogFragment"
@@ -85,7 +85,7 @@
         tools:layout="@layout/fragment_bottom_sheet_dialog">
         <argument
             android:name="filterList"
-            app:argType="com.example.nasamarsrover.model.CameraModel[]" />
+            app:argType="com.example.nasamarsrover.model.FilterCameraModel[]" />
     </dialog>
 
     <dialog

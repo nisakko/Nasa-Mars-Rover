@@ -21,4 +21,5 @@
     <dimen name="horizontal_line_height">1dp</dimen>
     <dimen name="no_filter_text_margin_start">34dp</dimen>
     <dimen name="dialog_button_layout_margin_top">44dp</dimen>
+    <dimen name="close_button_dimens">30dp</dimen>
 </resources>
