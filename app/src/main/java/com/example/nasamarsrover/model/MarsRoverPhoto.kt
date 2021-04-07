@@ -4,8 +4,8 @@ import android.os.Parcelable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.nasamarsrover.GlideApp
 import com.example.nasamarsrover.R
+import com.example.nasamarsrover.application.GlideApp
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
