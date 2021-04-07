@@ -19,7 +19,7 @@ Project is created with:
 
 Select the Mars Rover on top bar to view photos taken by that rover
 
-![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/select-rovers.jpeg =250x500)
+![alt text](https://github.com/nisakko/Nasa-Mars-Rover/blob/master/blob/app/select-rovers.jpeg){ width=250px }
 
 
 Use the settings button to filter photos according to the date they are taken
