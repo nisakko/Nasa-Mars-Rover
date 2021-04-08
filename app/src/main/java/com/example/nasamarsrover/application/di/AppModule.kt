@@ -2,6 +2,7 @@ package com.example.nasamarsrover.application.di
 
 import android.util.Log
 import com.example.nasamarsrover.*
+import com.example.nasamarsrover.application.BASE_URL
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepository
 import com.example.nasamarsrover.data.local.MarsRoverPreferenceRepositoryImpl
 import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelper

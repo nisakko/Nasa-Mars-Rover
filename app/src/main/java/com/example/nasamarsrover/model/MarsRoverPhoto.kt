@@ -30,6 +30,7 @@ data class MarsRoverPhoto(@SerializedName(value = "id")
         @BindingAdapter("roverImage")
         fun loadImage(view: ImageView, imgSrc: String) {
             GlideApp.with(view.context).load(imgSrc).placeholder(R.drawable.ic_wrapping_loading_placeholder).
+            error(R.drawable.ic_wrapping_error_placeholder).
             dontAnimate().diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(view)
         }
     }

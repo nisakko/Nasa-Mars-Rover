@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 
 class DatePickerViewModel: ViewModel() {
 
-    fun formatDate(dayOfMonth: Int, month: Int, year:Int): String = "${year}-${month+1}-${dayOfMonth}"
+    fun formatDate(dayOfMonth: Int, month: Int, year: Int): String = "${year}-${month+1}-${dayOfMonth}"
 }

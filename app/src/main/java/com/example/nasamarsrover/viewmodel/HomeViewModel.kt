@@ -2,7 +2,7 @@ package com.example.nasamarsrover.viewmodel
 
 import androidx.lifecycle.*
 import androidx.paging.*
-import com.example.nasamarsrover.API_PAGE_SIZE
+import com.example.nasamarsrover.application.API_PAGE_SIZE
 import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelper
 import com.example.nasamarsrover.data.datasource.PagingDataSource
 import com.example.nasamarsrover.data.enums.RoverType

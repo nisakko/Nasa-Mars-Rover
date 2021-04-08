@@ -1,4 +1,4 @@
-package com.example.nasamarsrover
+package com.example.nasamarsrover.application
 
 const val BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/"
 const val API_KEY = "voQ4NGSYH3EUmTRsUj01CRvwi8CDdoiQE5boflLi"

@@ -17,8 +17,4 @@ interface NasaMarsRoverApiHelper {
     suspend fun getRoverInfo(
         roverName: String
     ): Response<RoverModelWrapper>
-
-    suspend fun getRoverInfo2(
-        roverName: String
-    ): Response<RoverModelWrapper>
 }

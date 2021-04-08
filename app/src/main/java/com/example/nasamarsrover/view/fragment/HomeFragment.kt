@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment() {
                 }
                 R.id.earthDateMenuItem -> {
                     val navDirections = HomeFragmentDirections.actionHomeFragmentToDatePickerDialogFragment(
-                        DialogModel(title = R.string.sol_description, btnActiveText = R.string.apply, btnPassiveText = R.string.cancel))
+                        DialogModel(btnActiveText = R.string.apply, btnPassiveText = R.string.cancel))
                     tryToNavigate(navDirections)
                     true
                 }

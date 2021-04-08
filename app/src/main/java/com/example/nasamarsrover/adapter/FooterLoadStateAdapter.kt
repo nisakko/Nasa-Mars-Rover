@@ -18,7 +18,7 @@ class FooterLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<F
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder =
         LoadStateViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_footer_load_state,parent, false), retry)
+            .inflate(R.layout.layout_footer_load_state, parent, false), retry)
 
 
     class LoadStateViewHolder(private val view: View, private val retry: () -> Unit) : RecyclerView.ViewHolder(view) {

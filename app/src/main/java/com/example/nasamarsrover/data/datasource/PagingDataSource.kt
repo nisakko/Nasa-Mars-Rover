@@ -2,7 +2,7 @@ package com.example.nasamarsrover.data.datasource
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.example.nasamarsrover.API_PAGE_SIZE
+import com.example.nasamarsrover.application.API_PAGE_SIZE
 import com.example.nasamarsrover.data.remote.NasaMarsRoverApiHelper
 import com.example.nasamarsrover.model.CameraModel
 import com.example.nasamarsrover.model.MarsRoverPhoto

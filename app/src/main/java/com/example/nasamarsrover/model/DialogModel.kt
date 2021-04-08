@@ -1,7 +1,6 @@
 package com.example.nasamarsrover.model
 
 import android.os.Parcelable
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.nasamarsrover.R
 import kotlinx.android.parcel.Parcelize

@@ -3,7 +3,7 @@ package com.example.nasamarsrover.data.local
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.Transformations
-import com.example.nasamarsrover.PREFERENCES_NAME
+import com.example.nasamarsrover.application.PREFERENCES_NAME
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken

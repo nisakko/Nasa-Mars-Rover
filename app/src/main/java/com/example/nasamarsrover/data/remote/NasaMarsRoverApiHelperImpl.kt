@@ -1,6 +1,6 @@
 package com.example.nasamarsrover.data.remote
 
-import com.example.nasamarsrover.API_KEY
+import com.example.nasamarsrover.application.API_KEY
 import com.example.nasamarsrover.model.MarsRoverResponse
 import com.example.nasamarsrover.model.RoverModelWrapper
 import retrofit2.Response
@@ -20,8 +20,4 @@ class NasaMarsRoverApiHelperImpl @Inject constructor(val nasaMarsRoverService: N
 
     override suspend fun getRoverInfo(roverName: String): Response<RoverModelWrapper> =
         nasaMarsRoverService.getRoverInfo(roverName, API_KEY)
-
-    override suspend fun getRoverInfo2(roverName: String): Response<RoverModelWrapper> =
-        nasaMarsRoverService.getRoverInfo(roverName, API_KEY)
-
 }

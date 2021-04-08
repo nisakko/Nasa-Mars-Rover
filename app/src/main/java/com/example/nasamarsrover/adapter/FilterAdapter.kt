@@ -9,7 +9,7 @@ import com.example.nasamarsrover.databinding.FilterListItemBinding
 import com.example.nasamarsrover.model.FilterCameraModel
 
 class FilterAdapter(private val onClick: (FilterCameraModel) -> Unit) :
-    ListAdapter<FilterCameraModel,FilterAdapter.ViewHolder>(FilterItemDiffCallback) {
+    ListAdapter<FilterCameraModel, FilterAdapter.ViewHolder>(FilterItemDiffCallback) {
 
     class ViewHolder(private val binding: FilterListItemBinding, val onClick: (FilterCameraModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FilterCameraModel){
