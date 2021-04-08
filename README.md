@@ -14,6 +14,7 @@ Project is created with:
 * MVVM
 * Data Binding
 * Paging 3 Library
+* Coroutines
 
 ## Examples of Use
 
